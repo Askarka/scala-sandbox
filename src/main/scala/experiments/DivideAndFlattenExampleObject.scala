@@ -66,4 +66,5 @@ object DivideAndFlattenExampleObject extends App {
     "Number is " + a.toString
   }
 
+
   }
