@@ -1,18 +1,31 @@
-import tasks.collections.Naval.{Point, Ship}
-
-val sh1 =
-  """1 6
-    |1 7
-    |1 9""".stripMargin
-val sh2 =
-  """2 5
-    |3 5
-    |4 5
-    |4 5""".stripMargin
-val sh3 =
-"""9 9"""
-val stringsShipList = List(sh1, sh2, sh3)
-def createShip(string: String): Ship = {
-  string.split(Array(' ', '\n')).grouped(2).toList.map((a => new Point(a.head.toString.toInt, a.last.toString.toInt)))
+import tasks.collections.Naval.{Field, Ship}
+import tasks.collections.SeaBattle.{createShip, validateShip}
+def markUsedCells(field: Field, ship: Ship) = {
+  field.foldLeft(Vector[Vector[(Boolean, Int, Int)]]())(
+    (a, b) => a:+ b.foldLeft(Vector[(Boolean, Int, Int)]())
+    ((x, y) => if (y || ship.contains((a.length, x.length))) x :+ (true, a.length, x.length) else x :+ (false, a.length, x.length)))
 }
-stringsShipList.map(createShip)
+val sh1 = "2 6" +
+  "\n2 7" +
+  "\n2 8"
+val sh2 = "2 5" +
+  "\n3 5" +
+  "\n4 5" +
+  "\n5 5"
+val field: Vector[Vector[Boolean]] = Vector.fill(10)(Vector.fill(10)(false))
+val sh3 = "9 9"
+val stringsShipList = List(sh1, sh2, sh3)
+stringsShipList.map(createShip).map(markUsedCells(field, _)).foreach(println)
+
+val sh1 = "2 6" +
+  "\n2 7" +
+  "\n2 8"
+
+val sh2 = "2 5" +
+  "\n3 5" +
+  "\n4 5" +
+  "\n5 5"
+
+val sh3 = "9 9"
+val stringsShipList = List(sh1, sh2, sh3)
+stringsShipList.map(createShip).map(validateShip).foreach(println)

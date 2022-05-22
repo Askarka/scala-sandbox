@@ -1,5 +1,7 @@
 package tasks.collections
 
+import scala.io.StdIn
+
 object Naval {
   type Point = (Int, Int)
   type Field = Vector[Vector[Boolean]]
@@ -40,8 +42,7 @@ object SeaBattle {
   } // определить, подходит ли корабль по своим характеристикам
 
   def validatePosition(ship: Ship, field: Field): Boolean = {
-    val convenientField: List[List[Boolean]] = field.map(_.toList).toList
-    ship.forall(a => convenientField(a._1)(a._2))
+    ship.forall(a => field(a._1)(a._2))
   } // определить, можно ли его поставить
 
   def enrichFleet(fleet: Fleet, name: String, ship: Ship): Fleet = {
@@ -49,29 +50,43 @@ object SeaBattle {
   } // добавить корабль во флот
 
   def markUsedCells(field: Field, ship: Ship): Field = {
-    val convenientField: List[List[Boolean]] = field.map(_.toList).toList
-    ???
+    field.foldLeft(Vector[Vector[Boolean]]())(
+      (a, b) => a :+ b.foldLeft(Vector[Boolean]())
+      ((x, y) => if (
+        y ||
+          ship.contains((a.length - 1, x.length - 1)) ||
+          ship.contains((a.length - 1, x.length)) ||
+          ship.contains((a.length - 1, x.length + 1)) ||
+          ship.contains((a.length, x.length - 1)) ||
+          ship.contains((a.length, x.length)) ||
+          ship.contains((a.length, x.length + 1)) ||
+          ship.contains((a.length + 1, x.length - 1)) ||
+          ship.contains((a.length + 1, x.length)) ||
+          ship.contains((a.length + 1, x.length + 1))
+
+      ) x :+ true else x :+ false))
   } // пометить клетки, которые занимает добавляемый корабль
 
-  def tryAddShip(game: Game, name: String, ship: Ship): Game = ??? // логика вызовов методов выше
+  def tryAddShip(game: Game, name: String, ship: Ship): Game = {
+    if (!validateShip(ship) || !validatePosition(ship, game._1))game
+    else {
+      new Game(markUsedCells(game._1, ship), enrichFleet(game._2, name, ship))
+    }
+  } // логика вызовов методов выше
 
   def main(args: Array[String]): Unit = {
-    val sh1 = "2 6" +
-      "\n2 7" +
-      "\n2 8"
+    val potentialShipsAmount = StdIn.readLine().toInt
 
-    val sh2 = "2 5" +
-      "\n3 5" +
-      "\n4 5" +
-      "\n5 5"
+    def play(game: Game, ships: Int): Game = {
+      ships match {
+        case 0 => game
+        case n: Int => {
+          val name = StdIn.readLine().toInt
+          play(tryAddShip(game, ???, ???), n - 1)
+        }
+      }
+    }
 
-    val sh3 = "9 9"
-    val stringsShipList = List(sh1, sh2, sh3)
-    stringsShipList.map(createShip).map(validateShip).foreach(println)
-
-  }
-
-  def createShip(string: String): Ship = {
-    string.split(Array(' ', '\n')).grouped(2).toList.map((a => new Point(a.head.toString.toInt, a.last.toString.toInt)))
+    play((field, Map[String, Ship]()), potentialShipsAmount)
   }
 }
