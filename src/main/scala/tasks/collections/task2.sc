@@ -1,5 +1,4 @@
 import tasks.collections.Naval.{Field, Ship}
-import tasks.collections.SeaBattle.{createShip, validateShip}
 def markUsedCells(field: Field, ship: Ship) = {
   field.foldLeft(Vector[Vector[(Boolean, Int, Int)]]())(
     (a, b) => a:+ b.foldLeft(Vector[(Boolean, Int, Int)]())
@@ -15,7 +14,6 @@ val sh2 = "2 5" +
 val field: Vector[Vector[Boolean]] = Vector.fill(10)(Vector.fill(10)(false))
 val sh3 = "9 9"
 val stringsShipList = List(sh1, sh2, sh3)
-stringsShipList.map(createShip).map(markUsedCells(field, _)).foreach(println)
 
 val sh1 = "2 6" +
   "\n2 7" +
@@ -28,4 +26,3 @@ val sh2 = "2 5" +
 
 val sh3 = "9 9"
 val stringsShipList = List(sh1, sh2, sh3)
-stringsShipList.map(createShip).map(validateShip).foreach(println)

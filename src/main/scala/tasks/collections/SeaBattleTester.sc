@@ -1,5 +1,4 @@
 import tasks.collections.Naval.{Field, Point, Ship}
-import tasks.collections.SeaBattle.{createShip, validateShip}
 
 val p1: Point = (2, 3)
 val p2: Point = (2, 4)
