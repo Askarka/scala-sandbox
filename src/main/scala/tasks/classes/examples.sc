@@ -1,10 +1,10 @@
 import tasks.classes.Waiter
 
-class Dog(name: String) {
+class Dog2(name: String) {
   def woof(): Unit = println(s"$name")
 }
 
-val dog = new Dog("Gray")
+val dog = new Dog2("Gray")
 dog.woof()
 
 class Cat(val name: String) {

@@ -9,7 +9,7 @@ object FacedString {
     if (arg.startsWith("*_*") && arg.endsWith("*_*")) Some(arg.slice(3, arg.length - 3)) else None
 }
 
-object Main {
+object Main3 {
   def main(args: Array[String]): Unit = {
     StdIn.readLine() match {
       case FacedString(str) => println(str)
