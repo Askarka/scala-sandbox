@@ -7,7 +7,7 @@ object CollectionsTests extends App {
   var list = List[Any]()
 
   while (!list.contains("END")) {
-    list = list.appended(StdIn.readLine())
+    list = list :+ StdIn.readLine()
   }
   println(list)
 }
