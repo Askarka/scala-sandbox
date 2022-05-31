@@ -40,11 +40,5 @@ object TypeClassesAndParameters {
 
     println(sumWithImplicit(List("a", "b")))
     println(sumWithImplicit(List(1, 2)))
-
-    def afunk(a: => Nothing): Int = 45
-    afunk(throw new Exception)
-
-
-
   }
 }
