@@ -1,4 +1,4 @@
-package tasks.classes.varianceAndGenus
+package tasks.classes.varianceandgenus
 
 object Task1 {
   class A(val value: String)

@@ -1,6 +1,6 @@
-package tasks.classes.aliasesAndComponents
+package tasks.classes.aliasesandcomponents
 
-import tasks.classes.aliasesAndComponents.Task1.Vect.Aux
+import tasks.classes.aliasesandcomponents.Task1.Vect.Aux
 
 object Task1 {
   trait Vect extends Any {

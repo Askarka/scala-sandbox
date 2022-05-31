@@ -1,5 +1,5 @@
-import tasks.classes.aliasesAndComponents.Task1.{StringVect, Vect}
-import tasks.classes.aliasesAndComponents.Task1.Vect.Aux
+import tasks.classes.aliasesandcomponents.Task1.{StringVect, Vect}
+import tasks.classes.aliasesandcomponents.Task1.Vect.Aux
 
 
 
