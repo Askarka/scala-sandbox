@@ -10,10 +10,10 @@ object OnComplete extends App {
 //    throw new Exception("tralala")
   }
 
-  a.onComplete {
-    case Success(result: String) => println(result)
-    case Failure(ex: Exception) => println(s"Operation failed with $ex")
-  }
+//  a.onComplete {
+//    case Success(result: String) => println(result)
+//    case Failure(ex: Exception) => println(s"Operation failed with $ex")
+//  }
   Thread.sleep(1000)
   println("Immediate result") // отобразится до Delayed result
 }
